@@ -1,0 +1,33 @@
+#app:
+#    resource: "@ProductBundle/Controller/"
+#    type:     annotation
+
+product_create:
+  path: /product/
+  defaults: { _controller: \MyApp\Bundle\ProductBundle\Product\Controller\CreateProductController::execute }
+  methods: [POST]
+
+product_delete:
+  path: /product/{id}/
+  defaults: { _controller: \MyApp\Bundle\ProductBundle\Product\Controller\DeleteProductController::execute }
+  methods: [DELETE]
+
+product_update:
+  path: /product/{id}/
+  defaults: { _controller: \MyApp\Bundle\ProductBundle\Product\Controller\UpdateProductController::execute }
+  methods: [PUT]
+
+product_list:
+  path: /product/
+  defaults: { _controller: \MyApp\Bundle\ProductBundle\Product\Controller\ListProductsController::execute }
+  methods: [GET]
+
+owner_create:
+  path: /owner/
+  defaults: { _controller: \MyApp\Bundle\ProductBundle\Owner\Controller\CreateOwnerController::execute }
+  methods: [POST]
+
+owner_list:
+  path: /owner/
+  defaults: { _controller: \MyApp\Bundle\ProductBundle\Owner\Controller\ListOwnersController::execute }
+  methods: [GET]

@@ -2,7 +2,7 @@
 
 namespace MyApp\Bundle\ProductBundle\Owner\Controller;
 
-use MyApp\Component\Product\Domain\Owner;
+use MyApp\Component\Product\Entity\Owner;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

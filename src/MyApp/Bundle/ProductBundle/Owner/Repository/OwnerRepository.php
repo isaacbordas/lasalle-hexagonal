@@ -11,7 +11,7 @@ class OwnerRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT o FROM \MyApp\Component\Product\Domain\Owner o ORDER BY o.name ASC'
+                'SELECT o FROM \MyApp\Component\Product\Entity\Owner o ORDER BY o.name ASC'
             )
             ->getResult();
     }

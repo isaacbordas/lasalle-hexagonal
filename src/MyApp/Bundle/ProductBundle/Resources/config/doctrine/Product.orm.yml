@@ -1,0 +1,36 @@
+MyApp\Component\Product\Entity\Product:
+  type: entity
+  table: product
+  id:
+    id:
+      type: integer
+      nullable: false
+      options:
+        unsigned: false
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+        type: string
+        nullable: false
+        length: 100
+        options:
+          fixed: false
+    price:
+      type: decimal
+      nullable: false
+      scale: 2
+      options:
+        fixed: false
+    description:
+      type: text
+  manyToOne:
+    owner:
+      targetEntity: Owner
+      cascade: ["persist"]
+      inversedBy: products
+      joinColumns:
+        owner_id:
+          referencedColumnName: id
+      orphanRemoval: false

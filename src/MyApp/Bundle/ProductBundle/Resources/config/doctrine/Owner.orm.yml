@@ -1,0 +1,19 @@
+MyApp\Component\Product\Entity\Owner:
+  type: entity
+  table: owner
+  id:
+    id:
+      type: integer
+      nullable: false
+      options:
+        unsigned: false
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      nullable: false
+      length: 100
+      options:
+        fixed: false

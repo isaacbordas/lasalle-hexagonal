@@ -1,41 +1,18 @@
 <?php
 
-namespace MyApp\Component\Product\Domain;
+namespace MyApp\Component\Product\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Entity
- * @ORM\Table(name="product")
- */
 class Product
 {
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
     private $name;
 
-    /**
-     * @ORM\Column(type="decimal", scale=2)
-     */
     private $price;
 
-    /**
-     * @ORM\Column(type="text")
-     */
     private $description;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Owner", inversedBy="products", cascade={"persist"})
-     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
-     */
+
     private $owner;
 
     public function __construct(string $name, float $price, string $description, Owner $owner)

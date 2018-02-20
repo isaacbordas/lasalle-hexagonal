@@ -3,7 +3,7 @@
 namespace MyApp\Bundle\ProductBundle\Owner\Controller;
 
 use Doctrine\ORM\Query;
-use MyApp\Component\Product\Domain\Owner;
+use MyApp\Component\Product\Entity\Owner;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -12,7 +12,7 @@ class ListOwnersController extends Controller
 
     public function execute()
     {
-        $owners = $this->getDoctrine()->getRepository('\MyApp\Component\Product\Domain\Owner')->findAll(Query::HYDRATE_ARRAY);
+        $owners = $this->getDoctrine()->getRepository('\MyApp\Component\Product\Entity\Owner')->findAll(Query::HYDRATE_ARRAY);
 
         $ownersAsArray = array_map(function (Owner $o) {
              return $this->ownerToArray($o);

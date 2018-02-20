@@ -14,7 +14,7 @@ class UpdateProductController extends Controller
 
         $json = json_decode($request->getContent(), true);
 
-        $product = $this->getDoctrine()->getRepository('\MyApp\Component\Product\Domain\Product')->findOneBy(['id' => $id]);
+        $product = $this->getDoctrine()->getRepository('\MyApp\Component\Product\Entity\Product')->findOneBy(['id' => $id]);
 
         $product->setName($json['name']);
         $product->setPrice($json['price']);

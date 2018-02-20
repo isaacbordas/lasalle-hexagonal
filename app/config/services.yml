@@ -2,3 +2,21 @@
 # http://symfony.com/doc/current/service_container.html
 parameters:
 #    parameter_name: value
+services:
+  app.product.createProduct:
+    class: MyApp\Component\Product\Application\CreateProduct
+    arguments:
+      ownerRepository: '@app.product.repository.owner'
+      entityManager: '@doctrine.orm.entity_manager' # services are referenced with an @ symbol
+
+  app.product.owner.metadata:
+    class: Doctrine\ORM\Mapping\ClassMetadata
+    factory_service: doctrine # this is an instance of Registry
+    factory_method: getRepository
+    arguments: [ MyApp\Component\Product\Entity\Owner ]
+
+  app.product.repository.owner:
+      class: MyApp\Bundle\ProductBundle\Owner\Repository\OwnerRepository
+      arguments:
+        em: '@doctrine.orm.entity_manager'
+        mapping: '@app.product.owner.metadata'

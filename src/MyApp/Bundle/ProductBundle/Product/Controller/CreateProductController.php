@@ -2,7 +2,6 @@
 
 namespace MyApp\Bundle\ProductBundle\Product\Controller;
 
-use MyApp\Component\Product\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,14 +19,8 @@ class CreateProductController extends Controller
         $description = $json['description'];
         $ownerId = $json['ownerId'];
 
-        $owner = $this->getDoctrine()->getRepository('\MyApp\Component\Product\Entity\Owner')->findOneBy(['id' => $ownerId]);
-
-        $product = new Product((string)$name, (float)$price, (string)$description, $owner);
-
-        $em = $this->getDoctrine()->getManager();
-
-        $em->persist($product);
-        $em->flush();
+        $createProduct = $this->get('app.product.createProduct');
+        $createProduct->execute($name, $price, $description, $ownerId);
 
         return new Response('', 201);
 

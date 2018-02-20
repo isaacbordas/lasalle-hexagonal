@@ -12,7 +12,7 @@ class DeleteProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-       $product = $em->getReference('\MyApp\Component\Product\Domain\Product', $id);
+       $product = $em->getReference('\MyApp\Component\Product\Entity\Product', $id);
 
        $em->remove($product);
        $em->flush();

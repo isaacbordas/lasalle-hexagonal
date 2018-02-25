@@ -2,7 +2,6 @@
 
 namespace MyApp\Bundle\ProductBundle\Owner\Controller;
 
-use MyApp\Component\Product\Entity\Owner;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +14,10 @@ class CreateOwnerController extends Controller
 
         $json = json_decode($request->getContent(), true);
 
-        $em = $this->getDoctrine()->getManager();
+        $name = $json['name'];
 
-        $owner = new Owner((string)$json['name']);
-        $em->persist($owner);
-        $em->flush();
+        $createProduct = $this->get('app.product.createOwner');
+        $createProduct->execute($name);
 
         return new Response('', 201);
 

@@ -7,11 +7,26 @@ services:
     class: MyApp\Component\Product\Application\CreateProduct
     arguments:
       ownerRepository: '@app.product.repository.owner'
-      entityManager: '@doctrine.orm.entity_manager' # services are referenced with an @ symbol
+      entityManager: '@doctrine.orm.entity_manager'
+
+  app.product.createOwner:
+    class: MyApp\Component\Product\Application\CreateOwner
+    arguments:
+      entityManager: '@doctrine.orm.entity_manager'
+
+  app.product.deleteProduct:
+    class: MyApp\Component\Product\Application\DeleteProduct
+    arguments:
+      entityManager: '@doctrine.orm.entity_manager'
+
+  app.product.updateProduct:
+    class: MyApp\Component\Product\Application\UpdateProduct
+    arguments:
+      entityManager: '@doctrine.orm.entity_manager'
 
   app.product.owner.metadata:
     class: Doctrine\ORM\Mapping\ClassMetadata
-    factory_service: doctrine # this is an instance of Registry
+    factory_service: doctrine
     factory_method: getRepository
     arguments: [ MyApp\Component\Product\Entity\Owner ]
 

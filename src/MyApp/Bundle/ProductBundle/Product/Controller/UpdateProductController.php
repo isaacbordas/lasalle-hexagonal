@@ -20,8 +20,8 @@ class UpdateProductController extends Controller
         $product->setPrice($json['price']);
         $product->setDescription($json['description']);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->flush();
+        $updateProduct = $this->get('app.product.updateProduct');
+        $updateProduct->execute($product);
 
         return new Response('', 200);
 

@@ -10,14 +10,10 @@ class DeleteProductController extends Controller
 
     public function execute($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $deleteProduct = $this->get('app.product.deleteProduct');
+        $deleteProduct->execute($id);
 
-       $product = $em->getReference('\MyApp\Component\Product\Entity\Product', $id);
-
-       $em->remove($product);
-       $em->flush();
-
-       return new Response('', 200);
+        return new Response('', 200);
     }
 
 }

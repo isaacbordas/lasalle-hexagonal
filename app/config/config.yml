@@ -48,7 +48,7 @@ doctrine:
         port:     3306
         dbname:   products
         user:     root
-        password: endeve007
+        password: pass
         charset:  UTF8
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
@@ -66,7 +66,7 @@ doctrine:
             type: yml
             is_bundle: true
             dir: Resources/config/doctrine
-            prefix: MyApp\Component\Product\Entity
+            prefix: MyApp\Component\Product\Domain
 
 # Swiftmailer Configuration
 swiftmailer:

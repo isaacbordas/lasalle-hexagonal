@@ -9,14 +9,20 @@ services:
     autoconfigure: true
     public: false
 
-  app.actor.repository:
+  app.owner.repository:
     class: MyApp\Bundle\ProductBundle\Owner\Repository\MySqlOwnerRepository
     public: false
     arguments:
         - "@doctrine.orm.default_entity_manager"
 
-  app.actor.command_handler.create:
+  app.owner.command_handler.create:
     class: MyApp\Component\Product\Application\CommandHandler\Owner\CreateOwnerHandler
     public: true
     arguments:
-        - '@app.actor.repository'
+        - '@app.owner.repository'
+
+  app.owner.command_handler.read_all:
+      class: MyApp\Component\Product\Application\CommandHandler\Owner\ReadOwnerAllHandler
+      public: true
+      arguments:
+        - '@app.owner.repository'

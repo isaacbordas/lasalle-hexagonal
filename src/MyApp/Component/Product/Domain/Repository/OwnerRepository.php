@@ -9,6 +9,6 @@ interface OwnerRepository
 
     public function findById(int $ownerId);
     public function findAllOrderedByName();
-    public function save(Owner $owner): void;
+    public function save(Owner $owner) : void;
 
 }

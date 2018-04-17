@@ -2,10 +2,14 @@
 
 namespace MyApp\Bundle\ProductBundle\Owner\Repository;
 
-use MyApp\Component\Product;
-use Doctrine\ORM\EntityRepository;
+use MyApp\Component\Product\Domain\Owner;
+use MyApp\Component\Product\Domain\Repository\OwnerRepository;
+use MyApp\Component\Product\Domain\Exception\RepositoryException;
+use MyApp\Component\Product\Domain\Exception\UnknownActorException;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 
-class OwnerRepository extends EntityRepository implements Product\Entity\Repository\OwnerRepository
+class MySqlOwnerRepository implements Product\Entity\Repository\OwnerRepository
 {
 
     public function findById($ownerId)

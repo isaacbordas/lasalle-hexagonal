@@ -1,4 +1,4 @@
-MyApp\Component\Product\Entity\Product:
+MyApp\Component\Product\Domain\Product:
   type: entity
   table: product
   id:
@@ -28,9 +28,7 @@ MyApp\Component\Product\Entity\Product:
   manyToOne:
     owner:
       targetEntity: Owner
-      cascade: ["persist"]
-      inversedBy: products
-      joinColumns:
-        owner_id:
-          referencedColumnName: id
-      orphanRemoval: false
+      fetch: EAGER
+      joinColumn:
+        name: owner_id
+        referencedColumnName: id

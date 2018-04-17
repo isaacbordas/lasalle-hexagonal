@@ -3,35 +3,20 @@
 parameters:
 #    parameter_name: value
 services:
-  app.product.createProduct:
-    class: MyApp\Component\Product\Application\CreateProduct
+
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  app.actor.repository:
+    class: MyApp\Bundle\ProductBundle\Owner\Repository\MySqlOwnerRepository
+    public: false
     arguments:
-      ownerRepository: '@app.product.repository.owner'
-      entityManager: '@doctrine.orm.entity_manager'
+        - "@doctrine.orm.default_entity_manager"
 
-  app.product.createOwner:
-    class: MyApp\Component\Product\Application\CreateOwner
+  app.actor.command_handler.create:
+    class: MyApp\Component\Product\Application\CommandHandler\Owner\CreateOwnerHandler
+    public: true
     arguments:
-      entityManager: '@doctrine.orm.entity_manager'
-
-  app.product.deleteProduct:
-    class: MyApp\Component\Product\Application\DeleteProduct
-    arguments:
-      entityManager: '@doctrine.orm.entity_manager'
-
-  app.product.updateProduct:
-    class: MyApp\Component\Product\Application\UpdateProduct
-    arguments:
-      entityManager: '@doctrine.orm.entity_manager'
-
-  app.product.owner.metadata:
-    class: Doctrine\ORM\Mapping\ClassMetadata
-    factory_service: doctrine
-    factory_method: getRepository
-    arguments: [ MyApp\Component\Product\Entity\Owner ]
-
-  app.product.repository.owner:
-      class: MyApp\Bundle\ProductBundle\Owner\Repository\OwnerRepository
-      arguments:
-        em: '@doctrine.orm.entity_manager'
-        mapping: '@app.product.owner.metadata'
+        - '@app.actor.repository'

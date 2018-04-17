@@ -1,4 +1,4 @@
-MyApp\Component\Product\Entity\Owner:
+MyApp\Component\Product\Domain\Owner:
   type: entity
   table: owner
   id:
@@ -15,5 +15,3 @@ MyApp\Component\Product\Entity\Owner:
       type: string
       nullable: false
       length: 100
-      options:
-        fixed: false

@@ -9,6 +9,36 @@ services:
     autoconfigure: true
     public: false
 
+  app.product.repository:
+    class: MyApp\Bundle\ProductBundle\Product\Repository\MySqlProductRepository
+    public: false
+    arguments:
+        - "@doctrine.orm.default_entity_manager"
+
+  app.product.command_handler.create:
+    class: MyApp\Component\Product\Application\CommandHandler\Product\CreateProductHandler
+    public: true
+    arguments:
+        - '@app.product.repository'
+
+  app.product.command_handler.update:
+    class: MyApp\Component\Product\Application\CommandHandler\Product\UpdateProductHandler
+    public: true
+    arguments:
+        - '@app.product.repository'
+
+  app.product.command_handler.delete:
+    class: MyApp\Component\Product\Application\CommandHandler\Product\DeleteProductHandler
+    public: true
+    arguments:
+        - '@app.product.repository'
+
+  app.product.command_handler.read_all:
+      class: MyApp\Component\Product\Application\CommandHandler\Product\ReadProductAllHandler
+      public: true
+      arguments:
+        - '@app.product.repository'
+
   app.owner.repository:
     class: MyApp\Bundle\ProductBundle\Owner\Repository\MySqlOwnerRepository
     public: false

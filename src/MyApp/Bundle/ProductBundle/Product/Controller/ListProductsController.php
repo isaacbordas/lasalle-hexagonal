@@ -2,23 +2,34 @@
 
 namespace MyApp\Bundle\ProductBundle\Product\Controller;
 
-use Doctrine\ORM\Query;
-use MyApp\Component\Product\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use MyApp\Component\Product\Domain\Product;
+use MyApp\Component\Product\Domain\Exception\{InvalidArgumentException, RepositoryException};
 
 class ListProductsController extends Controller
 {
 
-    public function execute()
+    public function execute() : JsonResponse
     {
-        $products = $this->getDoctrine()->getRepository('\MyApp\Component\Product\Entity\Product')->findAll(Query::HYDRATE_ARRAY);
+        $handler = $this->get('app.product.command_handler.read_all');
 
-        $productsAsArray = array_map(function (Product $p) {
-            return $this->productToArray($p);
-        }, $products);
+        try {
+            $products = $handler->handle();
 
-        return new JsonResponse($productsAsArray);
+            $productsAsArray = array_map(function (Product $p) {
+                return $this->productToArray($p);
+            }, $products);
+
+            return new JsonResponse(
+                $productsAsArray,
+                200
+            );
+        } catch (InvalidArgumentException $e) {
+            return new JsonResponse(['error' => $e->getMessage()], 400);
+        } catch (RepositoryException $e) {
+            return new JsonResponse(['error' => 'An application error has occurred'], 500);
+        }
     }
 
     private function productToArray(Product $product)
@@ -28,7 +39,7 @@ class ListProductsController extends Controller
             'name' => $product->getName(),
             'price' => $product->getPrice(),
             'description' => $product->getDescription(),
-            'ownerId' => $product->getOwner()->getId()
+            'ownerId' => $product->getOwner()
         ];
     }
 

@@ -20,7 +20,7 @@ class Product
         $this->validateDescription($description);
         
         $this->name = filter_var($name, FILTER_SANITIZE_STRING);
-        $this->price = filter_var($price, FILTER_SANITIZE_NUMBER_FLOAT);
+        $this->price = filter_var($price, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $this->description = filter_var($description, FILTER_SANITIZE_STRING);
         $this->owner = $owner;
     }
@@ -82,9 +82,9 @@ class Product
         $this->description = $description;
     }
 
-    public function getOwner() : string
+    public function getOwner() : int
     {
-        return $this->owner->getName();
+        return $this->owner->getId();
     }
 
     public function setOwner(Owner $owner)

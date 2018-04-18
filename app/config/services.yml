@@ -38,6 +38,12 @@ services:
       public: true
       arguments:
         - '@app.product.repository'
+  
+  app.product.command_handler.read_byid:
+      class: MyApp\Component\Product\Application\CommandHandler\Product\ReadProductByIdHandler
+      public: true
+      arguments:
+        - '@app.product.repository'
 
   app.owner.repository:
     class: MyApp\Bundle\ProductBundle\Owner\Repository\MySqlOwnerRepository

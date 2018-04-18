@@ -24,7 +24,7 @@ class CreateOwnerController extends Controller
         try {
             $owner = $handler->handle($command);
             $this->get('doctrine.orm.default_entity_manager')->flush();
-            return new Response('Actor correctly created',201);
+            return new Response('Owner correctly created',201);
         } catch (InvalidArgumentException $e) {
             return new Response('error', 400);
         } catch (RepositoryException $e) {

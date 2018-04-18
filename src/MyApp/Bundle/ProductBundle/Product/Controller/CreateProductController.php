@@ -12,7 +12,7 @@ use MyApp\Component\Product\Domain\Exception\{InvalidArgumentException, Reposito
 class CreateProductController extends Controller
 {
 
-    public function execute(Request $request)
+    public function execute(Request $request) : Response
     {
 
         $json = json_decode($request->getContent(), true);

@@ -15,6 +15,10 @@ class DeleteProductController extends Controller
     {
         $id = filter_var($id ?? '', FILTER_SANITIZE_NUMBER_INT);
 
+        if (empty($id)) {
+            throw new InvalidArgumentException("Argument not valid", 400);
+        }
+
         $command = new DeleteProductCommand($id);
         $handler = $this->get('app.product.command_handler.delete');
 

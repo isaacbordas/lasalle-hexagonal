@@ -21,6 +21,10 @@ class CreateProductController extends Controller
         $description = filter_var($json['description'] ?? '', FILTER_SANITIZE_STRING);
         $ownerId = filter_var($json['ownerId'] ?? '', FILTER_SANITIZE_NUMBER_INT);
 
+        if (empty($name) || empty($price) || empty($description) || empty($ownerId)) {
+            throw new InvalidArgumentException("Missing arguments", 400);
+        }
+
         $command = new CreateProductCommand($name, $price, $description, $ownerId);
         $handler = $this->get('app.product.command_handler.create');
 
